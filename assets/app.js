@@ -6,7 +6,6 @@ function clearAPIRequestAndError() {
 function clearClaimsAndError() {
     document.getElementById('claims').value = '';
     document.getElementById('claims_formatting_error').innerHTML = '';
-    console.log('sh')
 }
 
 function makeAPIRequest() {
