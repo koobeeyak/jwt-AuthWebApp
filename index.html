@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<head>
+	<script src="/assets/app.js"></script>
+</head>
+<body>
+	<h1>Make an API request with authorization via JSON Web Token (JWT)</h1>
+	<div id="page_info" name="page_info">
+		<p>Write some info here.</p>
+		<p>... and here.</p>
+	</div>
+	<table>
+		<tr>
+			<td style="width:500px;">
+				<form onsubmit="makeAPIRequest();">
+					<h2>API Path:</h2>
+					<input type="text" name="url" id="url" value="http://127.0.0.1:8081/api/report" style="width:300px;">
+
+					<h2>API Request (in JSON):</h2>
+					<span id="api_request_formatting_error" style="color:red;">Error</span>
+					<br>
+					<textarea name="api_request" id="api_request">{"invalid json"</textarea>
+					<br>
+					<a onclick="formatAPIRequest();" style="cursor:pointer;">Format</a> |
+					<a onclick="clearAPIRequestAndError();" style="cursor:pointer;">Clear</a>
+
+					<h2>Claims to pass in JWT:</h2>
+					<span id="claims_formatting_error" style="color:red;">Error</span>
+					<br>
+					<textarea name="claims" id="claims">{"invalid json"</textarea>
+					<br>
+					<a onclick="formatClaims();" style="cursor:pointer;">Format</a> |
+					<a onclick="clearClaimsAndError();" style="cursor:pointer;">Clear</a>
+					<br><br>
+
+					<input type="submit">
+				</form>
+			</td>
+			<td>Response Goes Here</td>
+		</tr>
+	</table>
+</body>
