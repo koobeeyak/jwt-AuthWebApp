@@ -37,8 +37,13 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jwtHandler(w http.ResponseWriter, r *http.Request) {
+	// form will contain API path and JWT claims passed in by AJAX
 	r.ParseForm()
+	log.Println("Form: ", r.Form)
 	claims := r.FormValue("claims")
+	path := r.FormValue("path")
+	log.Println("Path: ", path)
+	log.Println("Claims: ", claims)
 
 	var claims_json map[string]interface{}
 	if err := json.Unmarshal([]byte(claims), &claims_json); err != nil {
@@ -58,12 +63,18 @@ func jwtHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println("Error during token gen: ", err)
 	} else {
-		w.Write([]byte(tokenString))
+		// Write JWT to header, redirect to API Path
+		//w.Write([]byte(tokenString))
+		log.Println("JWT: ", tokenString)
+		w.Header().Add(tokenHeaderName, tokenString)
+		log.Println("We're tryint to redirect to apiReportHandler.header: ", w.Header())
+		http.Redirect(w, r, path, http.StatusFound)
 	}
 }
 
 func apiReportHandler(w http.ResponseWriter, r *http.Request) {
 	// allow requests from localhost
+	log.Println("We've redirected to apiReportHandler.header: ", r.Header)
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", tokenHeaderName)
 

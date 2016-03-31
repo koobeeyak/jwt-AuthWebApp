@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 <head>
-	<script src="/assets/app.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+	<script src="/assets/app.js" type="text/javascript"></script>
 </head>
 <body>
 	<h1>Make an API request with authorization via JSON Web Token (JWT)</h1>
@@ -26,7 +28,7 @@
 					<h2>Claims to pass in JWT:</h2>
 					<span id="claims_formatting_error" style="color:red;">Error</span>
 					<br>
-					<textarea name="claims" id="claims">{"invalid json"</textarea>
+					<textarea name="claims" id="claims">{"auth":"true"}</textarea>
 					<br>
 					<a onclick="formatClaims();" style="cursor:pointer;">Format</a> |
 					<a onclick="clearClaimsAndError();" style="cursor:pointer;">Clear</a>
