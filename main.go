@@ -64,19 +64,23 @@ func jwtHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println("Error during token gen: ", err)
 	} else {
 		// Write JWT to header, redirect to API Path
-		//w.Write([]byte(tokenString))
 		log.Println("JWT: ", tokenString)
-		w.Header().Add(tokenHeaderName, tokenString)
+		//w.Header().Set(tokenHeaderName, tokenString)
 		log.Println("We're tryint to redirect to apiReportHandler.header: ", w.Header())
+		//w.Write([]byte(tokenString))
+
+		// THE problem is we can't redirect with header
 		http.Redirect(w, r, path, http.StatusFound)
 	}
 }
 
 func apiReportHandler(w http.ResponseWriter, r *http.Request) {
 	// allow requests from localhost
-	log.Println("We've redirected to apiReportHandler.header: ", r.Header)
+	log.Println("In apiReportHandler")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", tokenHeaderName)
+	log.Println("We've redirected to apiReportHandler.header: ", r.Header)
+	log.Println("apiReportHandler request body: ", r.Body)
 
 	log.Println("Method: ", r.Method)
 	if r.Method == "OPTIONS" {
